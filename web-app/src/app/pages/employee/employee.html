@@ -1,0 +1,12 @@
+<div class="p-8">
+    <div class="flex justify-between mb-2 items-center">
+        <h1 class="text xl font-semibold">Employee List</h1>
+        <!-- <mat-form-field class="w-4/12">
+            <mat-label>Search</mat-label>
+            <Input matInput type="text" [formControl]="searchControl" />
+            
+        </mat-form-field> -->
+        <button mat-flat-button class="bg-green-500!" (click)="add()">Add</button>
+    </div>
+    <app-table [data]="employeesList" [displayedColumns]="showCols" (onEdit)="edit($event)" (onDelete)="delete($event)"></app-table>
+</div>

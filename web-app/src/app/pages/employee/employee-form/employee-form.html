@@ -1,0 +1,108 @@
+<mat-card class="form-card p-8">
+  @if(this.data.employeeId) {
+  <mat-card-title>Update Employee</mat-card-title>
+  }
+  @else {
+<mat-card-title>Add Employee</mat-card-title>
+  }
+  <form [formGroup]="employeeForm"  (ngSubmit)="onSubmit()">
+    
+    <mat-form-field   class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <!-- <mat-error *ngIf="employeeForm.get('name')?.invalid && employeeForm.get('name')?.touched">
+        Name is required (min 3 chars)
+
+      </mat-error> -->
+    </mat-form-field>
+
+    <mat-form-field   class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <!-- <mat-error *ngIf="employeeForm.get('email')?.invalid && employeeForm.get('email')?.touched">
+        Enter a valid email
+      </mat-error> -->
+    </mat-form-field>
+
+    <div class=" flex gap-2">
+        <mat-form-field   class="w-5/12">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone" />
+      <!-- <mat-error *ngIf="employeeForm.get('phone')?.invalid && employeeForm.get('phone')?.touched">
+        Enter a 10  digit mobile number
+      </mat-error> -->
+    </mat-form-field>
+    <div class="w-7/12">
+    <label>Gender</label>
+    <mat-radio-group formControlName="gender" >
+  <mat-radio-button [value]="1">Male</mat-radio-button>
+  <mat-radio-button [value]="2">Female</mat-radio-button>
+</mat-radio-group>
+</div>
+    </div>
+
+<div class="flex gap-2">
+    <mat-form-field   class="w-6/12">
+      <mat-label>Job Title</mat-label>
+      <mat-select formControlName="jobTitle">
+        <!-- <mat-option *ngFor="let dept of jobTitle" [value]="dept">{{ dept }}</mat-option> -->
+         <mat-option value="developer">Developer</mat-option>
+         <mat-option value="designer">Designer</mat-option>
+         <mat-option value="manager">Manager</mat-option>
+         <mat-option value="Analyst">Analyst</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-6/12">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="departmentID">
+        @for(item of departments;track $index){
+          <mat-option [value]="item.id">{{ item.name}}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+</div>
+<div>
+  
+</div>
+<div class="flex gap-2">
+<mat-form-field   class="w-12/12">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="dateOfBirth" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker1">
+        <mat-icon matDatepickerToggleIcon> keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker1 ></mat-datepicker>
+    </mat-form-field>
+</div>
+    <div class="flex gap-2">
+        <mat-form-field   class="w-6/12">
+      <mat-label>Joining Date</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="joiningDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker2">
+        <mat-icon matDatepickerToggleIcon> keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker2 ></mat-datepicker>
+    </mat-form-field>
+
+<mat-form-field   class="w-6/12">
+      <mat-label>Last Working Date</mat-label>
+      <input matInput [matDatepicker]="picker3" formControlName="lastWorkingDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker3">
+        <mat-icon matDatepickerToggleIcon> keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker3 ></mat-datepicker>
+    </mat-form-field>
+
+    </div>
+
+    <div class="flex justify-center">
+        <button mat-raised-button color="text-white!" type="submit" 
+        class="{ employeeForm.invalid ? 'bg-gray-200!' : 
+        'bg-green-500!' }"  [disabled]="employeeForm.invalid">{{ this.data.employeeId ? 'Update' : 'Submit' }}</button>
+    </div>
+  </form>
+</mat-card>

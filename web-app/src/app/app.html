@@ -1,0 +1,41 @@
+<header>
+  <mat-toolbar class="bg-blue-400! flex justify-between">
+  <div class="flex items-center">
+    <button (click)="drawer.toggle()" matIconButton class="text-white!" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="text-white!">Employee Management System</span>
+  </div>
+  @if(authService.isLoggedIn){
+    <div class="flex gap-2 items-center">
+      <span routerLink="/Profile" class="text-white! cursor-pointer">{{authService.authDetail?.email}}</span>
+      <button (click)="logout()" mat-icon-button class="text-white!">
+    <mat-icon>logout</mat-icon>
+  </button>
+    </div>
+  
+}
+</mat-toolbar>
+</header>
+<mat-drawer-container class="" >
+  <mat-drawer #drawer class="w-[300px] bg-White Shadow-lg" mode="side" [opened]="authService.isLoggedIn">
+    <div class="flex flex-col items-center gap-4 text-blue-700 p-4">
+      @if(authService.isEmployee){
+      <a routerLink="/Employee-Dashboard">Employee Dashboard</a>
+      }
+      @else{
+      <a routerLink="/">Dashboard</a>
+      <a routerLink="/Department">Department</a>
+      <a routerLink="/Employee">Employee List</a>
+      }
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <main class="min-h-screen bg-gray-100">
+      <router-outlet></router-outlet>  
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<footer></footer>

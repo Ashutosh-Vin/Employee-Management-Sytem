@@ -1,0 +1,24 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
+
+namespace Emp_MS.Entity
+{
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string JobTitle { get; set; }
+        public int Gender { get; set; }
+        [ForeignKey(nameof(Department))]
+        public int? DepartmentID { get; set; }
+        public Department? Department { get; set; }
+        public DateTime JoiningDate { get; set; }
+        public DateTime LastWorkingDate { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        public int? userId {  get; set; }
+        public User? User { get; set; }
+    }
+}
